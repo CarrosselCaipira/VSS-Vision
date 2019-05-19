@@ -83,8 +83,8 @@ void CameraReader::setSource(std::string actualCameraIndex) {
 
 void CameraReader::readCameraCoefficients() {
 
-    std::string user(getenv("USER"));
-    std::string folder = "/home/" + user + "/.vss-files/cameraCoefficients.xml";
+    //std::string user(getenv("USER"));
+    std::string folder = "/.vss-files/cameraCoefficients.xml";
 
     cv::FileStorage fs;
     fs.open(folder, cv::FileStorage::READ);
