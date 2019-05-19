@@ -67,10 +67,49 @@ bool GImage::on_button_press_event (GdkEventButton* event){
         current_point++;
         if (current_point > 3) current_point = 0;
     }
+    else {
+        float valH = ((float)this->cv_image.at<cv::Vec3b>(event->y, event->x)[0]); // valor de H no pixel clicado
+        float valS = ((float)this->cv_image.at<cv::Vec3b>(event->y, event->x)[1]); // valor de S no pixel clicado
+        float valV = ((float)this->cv_image.at<cv::Vec3b>(event->y, event->x)[2]); // valor de V no pixel clicado
+      
+        std::cout << "Pegamos valores:" << '\n';
+        std::cout << "valH: " << valH << '\n';
+        std::cout << "valS: " << valS << '\n';
+        std::cout << "valV: " << valV << '\n';
+
+        colorsrange.max[H] = valH + 20;
+        if (colorsrange.max[H] > 255)
+            colorsrange.max[H] = 255;
+        colorsrange.max[S] = valS + 20;
+        if (colorsrange.max[S] > 255)
+            colorsrange.max[S] = 255;
+        colorsrange.max[V] = valV + 20;
+        if (colorsrange.max[V] > 255)
+            colorsrange.max[V] = 255;
+
+        colorsrange.min[H] = valH - 40;
+        if (colorsrange.min[H] < 0)
+            colorsrange.min[H] = 0;
+        colorsrange.min[S] = valS - 40;
+        if (colorsrange.min[S] < 0)
+            colorsrange.min[S] = 0;
+        colorsrange.min[V] = valV - 22;
+        if (colorsrange.min[V] < 0)
+            colorsrange.min[V] = 0;
+
+        
+
+        /* indicando que houve clique nesse frame. */
+        clique = true;
+    }
+    // }
 
     return true;
 }
 
+ColorRange GImage::getColors(){
+    return colorsrange;
+}
 
 void GImage::processImage(cv::Mat image) {
 

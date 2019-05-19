@@ -13,6 +13,8 @@
 #include <iostream>
 #include <vector>
 #include "FrameHelper.h"
+#include "ColorRecognizer.h"
+#include "Domain/ColorRange.h"
 
 #include "opencv2/imgproc/imgproc.hpp"
 
@@ -29,6 +31,8 @@ public:
     std::vector<cv::Point> getPoints();
 
     std::vector<cv::Point> clicked_point;
+
+    ColorRange getColors();
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
@@ -47,6 +51,9 @@ private:
     int height_image;
     int width_original_image;
     int height_original_image;
+
+    ColorRange colorsrange;
+    bool clique;
 };
 
 #endif
