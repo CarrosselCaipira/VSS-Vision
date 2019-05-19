@@ -35,13 +35,26 @@ bool CalibrationWindow::onKeyboard(GdkEventKey* event, Gtk::Window* window){
     if(event->keyval == GDK_KEY_space) {
         // window->hide();
     } else if(event->keyval == GDK_KEY_Return) {
-        window->hide();
+        // window->hide();
+        // Temporario
+        std::cout << screenImage->getColors() << '\n';
+        calibration.colorsRange.at(actualColorRangeIndex) = screenImage->getColors();
+        colorRecognizer->setColorRange(calibration.colorsRange.at(actualColorRangeIndex));
+        std::cout << colorRecognizer->getColorRange() << '\n';
     } else if(event->keyval == GDK_KEY_Escape) {
         window->hide();
     } else if(event->keyval == GDK_KEY_F1) {
         showBinaryImage = !showBinaryImage;
     }
     return true;
+}
+
+void CalibrationWindow::onMouse(GdkEventButton* event){
+    // Nao consegui dar bind
+    std::cout << screenImage->getColors() << '\n';
+    // calibration.colorsRange.at(actualColorRangeIndex) = screenImage->getColors();
+    // colorRecognizer->setColorRange(calibration.colorsRange.at(actualColorRangeIndex));
+    // std::cout << colorRecognizer->getColorRange() << '\n';
 }
 
 void CalibrationWindow::onButtonSave(Gtk::FileChooserDialog* fileChooser, Gtk::Entry* entry){

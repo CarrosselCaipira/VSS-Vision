@@ -41,6 +41,7 @@ public:
     int run(int argc, char *argv[]) override;
 
     bool onKeyboard(GdkEventKey*, Gtk::Window*) override;
+    void onMouse(GdkEventButton* event);
 
     void onButtonOpenSaveDialog(Gtk::FileChooserDialog*, Gtk::Entry*) override;
     void onButtonOpenLoadDialog(Gtk::FileChooserDialog*, Gtk::Entry*) override;
